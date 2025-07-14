@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
@@ -28,6 +28,7 @@ const NewIssuePage = () => {
   });
   const router = useRouter();
   const [error, setError] = useState("");
+  const [isSubmitting, setSubmitting] = useState(false);
 
   return (
     <div className="max-w-xl">
@@ -40,9 +41,11 @@ const NewIssuePage = () => {
         className="space-y-3"
         onSubmit={handleSubmit(async (data) => {
           try {
+            setSubmitting(true);
             await axios.post("/api/issues", data);
             router.push("/issues");
           } catch {
+            setSubmitting(false);
             setError("An unexpected error occured.");
           }
         })}
@@ -61,7 +64,10 @@ const NewIssuePage = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit</Button>
+        <Button disabled={isSubmitting}>
+          Submit
+          {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
