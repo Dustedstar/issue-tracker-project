@@ -16,7 +16,7 @@ interface Props {
   params: { id: string };
 }
 
-const IssueDetailPage = async ({ params }: Props) => {
+export default async function IssueDetailPage({ params }: Props) {
   const issueId = parseInt(params.id);
   const issue = await prisma.issue.findUnique({
     where: { id: issueId },
@@ -39,6 +39,4 @@ const IssueDetailPage = async ({ params }: Props) => {
       </Card>
     </div>
   );
-};
-
-export default IssueDetailPage;
+}
