@@ -11,12 +11,15 @@ import { prisma } from "@/prisma/client";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import delay from "delay";
 
+//! In the new Next.js version, params are now a Promise, and should be treated as such by awaiting them.
 interface Props {
   params: Promise<{ id: string }>;
 }
 
 export default async function IssueDetailPage({ params }: Props) {
+  await delay(2000);
   const param = await params;
   const issueId = parseInt(param.id);
 
