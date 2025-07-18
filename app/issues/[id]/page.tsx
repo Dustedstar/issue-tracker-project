@@ -3,6 +3,7 @@
  * * We also had to install react-markdown in order to preview the Markdown content.
  * ! TailwindCSS has no default styling for H1 and ul/li tags, so we use the @tailwindcss/typography plugin to circumvent this.
  * ! Because of the newest TailwindCSS version, there is no tailwind.config.js file, we have to import the plugin for typography by adding @plugin "@tailwindcss/typography" to our global.css
+ * ! for more info --> https://github.com/tailwindlabs/tailwindcss-typography
  */
 
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
@@ -16,8 +17,7 @@ interface Props {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
-  const param = await params;
-  const issueId = parseInt(param.id);
+  const issueId = parseInt(params.id);
   const issue = await prisma.issue.findUnique({
     where: { id: issueId },
   });
