@@ -7,7 +7,7 @@ import { issueSchema } from "../validationSchema";
 export async function PATCH(request: NextRequest) {
   //! different from the course, due to updates.
   const url = new URL(request.url);
-  const id = url.pathname.split("/").pop(); // Gets the [id] from the path
+  const id = url.pathname.split("/").pop();
   //! ---
   const issueId = parseInt(id ?? "");
   const body = await request.json();
