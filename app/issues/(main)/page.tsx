@@ -44,4 +44,9 @@ const IssuesPage = async () => {
   );
 };
 
+//* This page is static,since it has no parameters. Since we need it to update the issues everytime a user enters, for example after creating a new issue, we have to make the page dynamic.
+//* https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+//* There is still the issue of client-side caching with the router navigation, so we have to go to our IssueForm component and do a router.refresh() after pushing the user to the issues page.
+export const dynamic = "force-dynamic";
+
 export default IssuesPage;
