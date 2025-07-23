@@ -1,20 +1,17 @@
 "use client";
 
-import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
-import "easymde/dist/easymde.min.css";
-import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { infer as zodInfer } from "zod";
 import { issueSchema } from "@/app/api/issues/validationSchema";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import { Issue } from "@/app/generated/prisma";
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import SimpleMDE from "react-simplemde-editor";
+import { infer as zodInfer } from "zod";
 
 type IssueFormData = zodInfer<typeof issueSchema>;
 
