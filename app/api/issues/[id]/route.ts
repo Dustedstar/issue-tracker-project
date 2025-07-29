@@ -27,3 +27,15 @@ export async function PATCH(request: NextRequest) {
   });
   return NextResponse.json(updatedIssue, { status: 200 });
 }
+
+export async function DELETE(request: NextRequest) {
+  const url = new URL(request.url);
+  const id = url.pathname.split("/").pop();
+  const issueId = parseInt(id ?? "");
+
+  const issue = await prisma.issue.findUnique({ where: { id: issueId } });
+  if (!issue)
+    return NextResponse.json({ error: "Invalid Issue" }, { status: 404 });
+  await prisma.issue.delete({ where: { id: issueId } });
+  return NextResponse.json({});
+}
