@@ -4,7 +4,7 @@ import "./globals.css";
 import NavBar from "./NavBar";
 import "@radix-ui/themes/styles.css";
 import "@/theme-config.css";
-import { Theme } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,7 +26,9 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <Theme accentColor="violet" scaling="105%">
           <NavBar />
-          <main className="p-5">{children}</main>
+          <main className="p-5">
+            <Container>{children}</Container>
+          </main>
         </Theme>
       </body>
     </html>
