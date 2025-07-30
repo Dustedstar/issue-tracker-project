@@ -26,14 +26,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
         <AuthProvider>
-          <>
-            <Theme accentColor="violet" scaling="105%">
-              <NavBar />
-              <main className="p-5">
-                <Container>{children}</Container>
-              </main>
-            </Theme>
-          </>
+          <Theme accentColor="violet" scaling="105%">
+            <NavBar />
+            <main className="p-5">
+              <Container>{children}</Container>
+            </main>
+          </Theme>
         </AuthProvider>
       </body>
     </html>
