@@ -28,12 +28,10 @@ export default function RootLayout({
         <AuthProvider>
           <Theme accentColor="violet" scaling="105%">
             <div>
-              <div>
-                <NavBar />
-                <main className="p-5">
-                  <Container>{children}</Container>
-                </main>
-              </div>
+              <NavBar />
+              <main className="p-5">
+                <Container>{children}</Container>
+              </main>
             </div>
           </Theme>
         </AuthProvider>
