@@ -59,9 +59,10 @@ const NavBar = () => {
                     radius="full"
                     fallback="?"
                     className="cursor-pointer"
+                    referrerPolicy="no-referrer"
                   />
                 </DropdownMenu.Trigger>
-                <DropdownMenu.Content>
+                <DropdownMenu.Content align="center">
                   <DropdownMenu.Label>
                     <Text size="2">{session.user?.email}</Text>
                   </DropdownMenu.Label>
