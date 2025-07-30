@@ -1,10 +1,12 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
-import React, { PropsWithChildren } from "react";
+import React, { isValidElement, PropsWithChildren } from "react";
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-  return <SessionProvider>{children}</SessionProvider>;
+  console.log("AuthProvider children:", children);
+  console.log("Is valid React element?", isValidElement(children));
+  return <SessionProvider>{<>{children}</>}</SessionProvider>;
 };
 
 export default AuthProvider;
