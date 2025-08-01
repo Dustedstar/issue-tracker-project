@@ -6,7 +6,7 @@ import IssueActions from "./IssueActions";
 import { Status } from "@/app/generated/prisma";
 
 interface Props {
-  searchParams: { status: Status };
+  searchParams: Promise<{ status: Status }>;
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
