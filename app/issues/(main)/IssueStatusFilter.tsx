@@ -21,7 +21,6 @@ const IssueStatusFilter = () => {
         if (status === " ") router.push("/issues");
         else router.push("/issues" + query);
       }}
-      defaultValue=" "
     >
       <Select.Trigger placeholder="Filter by" />
       <Select.Content position="popper" align="center">
