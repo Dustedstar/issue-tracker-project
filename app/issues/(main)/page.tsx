@@ -8,7 +8,11 @@ import { Issue, Status } from "@/app/generated/prisma";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 
 interface Props {
-  searchParams: Promise<{ status: Status; orderBy: keyof Issue; order?: "asc" | "desc" }>;
+  searchParams: Promise<{
+    status: Status;
+    orderBy: keyof Issue;
+    order?: "asc" | "desc";
+  }>;
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -24,8 +28,8 @@ const IssuesPage = async ({ searchParams }: Props) => {
     { label: "Created", value: "createdAt", className: "hidden md:table-cell" },
   ];
 
-  // Default to ascending if not specified
-  const order: "asc" | "desc" = searchParameters.order === "desc" ? "desc" : "asc";
+  const order: "asc" | "desc" =
+    searchParameters.order === "desc" ? "desc" : "asc";
 
   const orderBy = columns
     .map((column) => column.value)
@@ -65,7 +69,9 @@ const IssuesPage = async ({ searchParams }: Props) => {
                   </NextLink>
                   {isActive && (
                     <ArrowUpIcon
-                      className={`inline transition-transform ${order === "desc" ? "rotate-180" : ""}`}
+                      className={`inline transition-transform ${
+                        order === "desc" ? "rotate-180" : ""
+                      }`}
                     />
                   )}
                 </Table.ColumnHeaderCell>
