@@ -1,11 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import Skeleton from "@/app/components/Skeleton";
-import React from "react";
-import { FaBug } from "react-icons/fa6";
-import classnames from "classnames";
-import { usePathname } from "next/navigation";
 import {
   Avatar,
   Box,
@@ -14,7 +9,11 @@ import {
   Flex,
   Text,
 } from "@radix-ui/themes";
+import classnames from "classnames";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FaBug } from "react-icons/fa6";
 
 const NavBar = () => {
   return (
@@ -89,7 +88,9 @@ const AuthStatus = () => {
             <Text size="2">{session!.user?.email}</Text>
           </DropdownMenu.Label>
           <DropdownMenu.Item>
-            <Link href="/api/auth/signout">Sign Out</Link>
+            <Link href="/api/auth/signout" className="w-full cursor-pointer">
+              Sign Out
+            </Link>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>

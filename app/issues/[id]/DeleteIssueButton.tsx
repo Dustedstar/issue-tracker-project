@@ -12,6 +12,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   const [error, setError] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
   delay(2000);
+
   const deleteIssue = async () => {
     try {
       setDeleting(true);
@@ -28,7 +29,11 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red" disabled={isDeleting} className="cursor-pointer">
+          <Button
+            color="red"
+            disabled={isDeleting}
+            style={{ cursor: isDeleting ? "not-allowed" : "pointer" }}
+          >
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
