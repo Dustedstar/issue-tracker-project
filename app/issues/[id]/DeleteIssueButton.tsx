@@ -46,7 +46,11 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button color="red" onClick={deleteIssue}>
+              <Button
+                color="red"
+                onClick={deleteIssue}
+                className="cursor-pointer"
+              >
                 Delete Issue
               </Button>
             </AlertDialog.Action>
