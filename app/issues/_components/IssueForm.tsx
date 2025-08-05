@@ -8,10 +8,14 @@ import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import SimpleMDE from "react-simplemde-editor";
 import { infer as zodInfer } from "zod";
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 
 type IssueFormData = zodInfer<typeof issueSchema>;
 
@@ -65,7 +69,10 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button disabled={isSubmitting}>
+        <Button
+          disabled={isSubmitting}
+          style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }}
+        >
           {issue ? "Update Issue" : "Submit New Issue"}{" "}
           {isSubmitting && <Spinner />}
         </Button>
