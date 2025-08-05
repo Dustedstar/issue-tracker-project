@@ -8,7 +8,7 @@ import { Issue, Status } from "@/app/generated/prisma";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 
 interface Props {
-  searchParams: Promise<{ status: Status; orderBy: keyof Issue }>;
+  searchParams: Promise<{ status: Status; orderBy: keyof Issue; order?: "asc" | "desc" }>;
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -24,11 +24,15 @@ const IssuesPage = async ({ searchParams }: Props) => {
     { label: "Created", value: "createdAt", className: "hidden md:table-cell" },
   ];
 
+  // Default to ascending if not specified
+  const order: "asc" | "desc" = searchParameters.order === "desc" ? "desc" : "asc";
+
   const orderBy = columns
     .map((column) => column.value)
     .includes(searchParameters.orderBy)
-    ? { [searchParameters.orderBy]: "asc" }
+    ? { [searchParameters.orderBy]: order }
     : undefined;
+
   const issues = await prisma.issue.findMany({
     where: { status },
     orderBy,
@@ -40,23 +44,33 @@ const IssuesPage = async ({ searchParams }: Props) => {
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
-            {columns.map((column) => (
-              <Table.ColumnHeaderCell
-                key={column.value}
-                className={column.className}
-              >
-                <NextLink
-                  href={{
-                    query: { ...searchParameters, orderBy: column.value },
-                  }}
+            {columns.map((column) => {
+              const isActive = column.value === searchParameters.orderBy;
+              const nextOrder = isActive && order === "asc" ? "desc" : "asc";
+              return (
+                <Table.ColumnHeaderCell
+                  key={column.value}
+                  className={column.className}
                 >
-                  {column.label}
-                </NextLink>
-                {column.value === searchParameters.orderBy && (
-                  <ArrowUpIcon className="inline" />
-                )}
-              </Table.ColumnHeaderCell>
-            ))}
+                  <NextLink
+                    href={{
+                      query: {
+                        ...searchParameters,
+                        orderBy: column.value,
+                        order: isActive ? nextOrder : "asc",
+                      },
+                    }}
+                  >
+                    {column.label}
+                  </NextLink>
+                  {isActive && (
+                    <ArrowUpIcon
+                      className={`inline transition-transform ${order === "desc" ? "rotate-180" : ""}`}
+                    />
+                  )}
+                </Table.ColumnHeaderCell>
+              );
+            })}
           </Table.Row>
         </Table.Header>
         <Table.Body>
