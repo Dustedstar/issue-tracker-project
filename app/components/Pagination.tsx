@@ -6,7 +6,7 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import { Button, Flex } from "@radix-ui/themes";
+import { Button, Flex, Text } from "@radix-ui/themes";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -31,7 +31,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
   };
 
   return (
-    <Flex gap="2" align="center">
+    <Flex gap="2" align="center" py="2" justify="center">
       <Button
         color="gray"
         variant="soft"
@@ -48,7 +48,9 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
       >
         <ChevronLeftIcon />
       </Button>
-      Page {currentPage} of {pageCount}
+      <Text className="text-sm sm:text-base">
+        Page {currentPage} of {pageCount}
+      </Text>
       <Button
         color="gray"
         variant="soft"
