@@ -3,20 +3,24 @@ import React from "react";
 import { Status } from "./generated/prisma";
 import Link from "next/link";
 
-interface Props {
+interface IssueCounts {
   open: number;
   inProgress: number;
   closed: number;
 }
 
-const IssueSummary = ({ open, inProgress, closed }: Props) => {
+const IssueSummary = ({ counts }: { counts: IssueCounts }) => {
   const containers: { label: string; value: number; status: Status }[] = [
-    { label: "Open Issues", value: open, status: "OPEN" },
-    { label: "In-Progress Issues", value: inProgress, status: "IN_PROGRESS" },
-    { label: "Closed Issues", value: closed, status: "CLOSED" },
+    { label: "Open Issues", value: counts.open, status: "OPEN" },
+    {
+      label: "In-Progress Issues",
+      value: counts.inProgress,
+      status: "IN_PROGRESS",
+    },
+    { label: "Closed Issues", value: counts.closed, status: "CLOSED" },
   ];
   return (
-    <Flex mt="5" gap="4">
+    <Flex mt="5" gap="4" justify="center">
       {containers.map((container) => (
         <Card key={container.label}>
           <Flex direction="column" gap="1">

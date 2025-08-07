@@ -12,7 +12,7 @@ const LatestIssues = async () => {
   });
   return (
     <Card>
-      <Heading size="5" mb="5">
+      <Heading size="5" mb="5" align="center">
         Latest Issues
       </Heading>
       <Table.Root>
