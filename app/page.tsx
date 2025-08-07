@@ -1,3 +1,5 @@
+import LatestIssues from "./LatestIssues";
+
 export default async function Home() {
-  return <div>Hello World</div>;
+  return <LatestIssues />;
 }
